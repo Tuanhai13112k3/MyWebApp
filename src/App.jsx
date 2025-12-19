@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import MyButton from './components/button/MyButton';
 import MyInput from './components/input/MyInput';
+import MyPopup from './components/popup/MyPopup';
 import MyTable from './components/table/MyTable';
 
 
@@ -46,7 +47,7 @@ function App() {
   const [inputValue, setInputValue] = useState("");
   const [result, setResult] = useState(null);
   const [error, setError] = useState("");
-
+  const [isPopupVisible, setVisible] = useState(false);
   const field = ([
     { key: 'id', label: 'ID' },
     { key: 'name', label: 'Name' },
@@ -79,6 +80,11 @@ function App() {
   const handleRowDoubleClick = (item) => {
     alert(`Bạn đã chọn dòng có ID: ${item.id}, Name: ${item.name}, Age: ${item.age}`);
   }
+
+  const handleTogglePopup = () => {
+    setVisible(!isPopupVisible);
+  }
+
   return (
     <div className='container'>
       <MyInput
@@ -105,8 +111,22 @@ function App() {
 
       <MyTable fields={field} data={data} onRowDoubleClick={handleRowDoubleClick}>
         <MyButton type="secondary" size="sm" handleClick={() => alert('Edit action')}>Edit</MyButton>
-        <MyButton type="danger" size="sm" handleClick={() => alert('Delete action')}>Delete</MyButton>
+        <MyButton type="danger" size="sm" handleClick={handleTogglePopup}>Delete</MyButton>
       </MyTable>
+
+      <MyPopup
+        visible={isPopupVisible}
+        title="My Popup Title"
+        footer={
+          <>
+            <MyButton type="primary" size="sm" handleClick={() => alert('Confirmed!')}>Confirm</MyButton>
+            <MyButton type="outline" size="sm" handleClick={handleTogglePopup}>Cancel</MyButton>
+          </>
+        }
+        onClose={handleTogglePopup}
+      >
+        <p>This is the content of the popup.</p>
+      </MyPopup>
     </div>
   );
 

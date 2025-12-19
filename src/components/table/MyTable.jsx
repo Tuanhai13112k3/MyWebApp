@@ -25,6 +25,8 @@ const MyTable = ({ fields, data, children, onRowDoubleClick }) => {
 }
 MyTable.propTypes = {
     fields: PropTypes.arrayOf(PropTypes.string).isRequired,
-    data: PropTypes.array
+    data: PropTypes.array,
+    children: PropTypes.node,
+    onRowDoubleClick: PropTypes.func
 }
 export default MyTable;
