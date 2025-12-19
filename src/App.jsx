@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import MyButton from './components/button/MyButton';
 import MyInput from './components/input/MyInput';
+import MyTable from './components/table/MyTable';
 
 
 function App() {
@@ -46,6 +47,18 @@ function App() {
   const [result, setResult] = useState(null);
   const [error, setError] = useState("");
 
+  const field = ([
+    { key: 'id', label: 'ID' },
+    { key: 'name', label: 'Name' },
+    { key: 'age', label: 'Age' },
+    { key: 'action', label: 'Action' }
+  ]);
+  const data = ([
+    { id: 1, name: 'Alice', age: 25 },
+    { id: 2, name: 'Bob', age: 30 },
+    { id: 3, name: 'Charlie', age: 35 }
+  ]);
+
   const handleExchange = () => {
     if (!error && inputValue !== "") {
       setResult(Number(inputValue) / 25000);
@@ -61,6 +74,10 @@ function App() {
     } else {
       setError("");
     }
+  }
+
+  const handleRowDoubleClick = (item) => {
+    alert(`Bạn đã chọn dòng có ID: ${item.id}, Name: ${item.name}, Age: ${item.age}`);
   }
   return (
     <div className='container'>
@@ -85,6 +102,11 @@ function App() {
       {/* {error && <p style={{ color: 'red' }}>{error}</p>} */}
 
       {result && <p>Số tiền là: ${result.toFixed(2)}</p>}
+
+      <MyTable fields={field} data={data} onRowDoubleClick={handleRowDoubleClick}>
+        <MyButton type="secondary" size="sm" handleClick={() => alert('Edit action')}>Edit</MyButton>
+        <MyButton type="danger" size="sm" handleClick={() => alert('Delete action')}>Delete</MyButton>
+      </MyTable>
     </div>
   );
 
