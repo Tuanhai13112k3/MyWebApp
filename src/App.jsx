@@ -90,7 +90,7 @@ function App() {
       <MyInput
         label="Số tiền"
         type="text"
-        size="sm"
+        size="lg"
         placeHolder="Nhập số tiền muốn chuyển đổi"
         value={inputValue}
         onInputChange={handleInputValue}
@@ -110,8 +110,10 @@ function App() {
       {result && <p>Số tiền là: ${result.toFixed(2)}</p>}
 
       <MyTable fields={field} data={data} onRowDoubleClick={handleRowDoubleClick}>
-        <MyButton type="secondary" size="sm" handleClick={() => alert('Edit action')}>Edit</MyButton>
-        <MyButton type="danger" size="sm" handleClick={handleTogglePopup}>Delete</MyButton>
+        <div className='flex gap-1 justify-center'>
+          <MyButton type="outline" size="sm" handleClick={() => alert('Edit action')}>Edit</MyButton>
+          <MyButton type="danger" size="sm" handleClick={handleTogglePopup}>Delete</MyButton>
+        </div>
       </MyTable>
 
       <MyPopup
@@ -120,7 +122,7 @@ function App() {
         footer={
           <>
             <MyButton type="primary" size="sm" handleClick={() => alert('Confirmed!')}>Confirm</MyButton>
-            <MyButton type="outline" size="sm" handleClick={handleTogglePopup}>Cancel</MyButton>
+            <MyButton type="danger" size="sm" handleClick={handleTogglePopup}>Cancel</MyButton>
           </>
         }
         onClose={handleTogglePopup}

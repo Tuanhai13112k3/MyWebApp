@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 const MyTable = ({ fields, data, children, onRowDoubleClick }) => {
     return (
         <>
-            <table>
-                <thead>
+            <table className='w-[500px] text-center'>
+                <thead className='border-b-2 border-black/50'>
                     <tr>
                         {fields.map((field) => (
                             <th key={field.key}>{field.label}</th>
@@ -12,7 +12,7 @@ const MyTable = ({ fields, data, children, onRowDoubleClick }) => {
                 </thead>
                 <tbody>
                     {data.map((item) => (
-                        <tr key={item.id} onDoubleClick={() => onRowDoubleClick(item)}>
+                        <tr className='border-b-2 border-black/50 cursor-pointer hover:bg-green-100' key={item.id} onDoubleClick={() => onRowDoubleClick(item)}>
                             {fields.map((field) => (
                                 field.key !== 'action' ? <td key={field.key}>{item[field.key]}</td> : <td key={field.key}>{children}</td>
                             ))}

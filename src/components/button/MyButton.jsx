@@ -1,10 +1,29 @@
 import PropTypes from 'prop-types';
-import '/src/assets/css/MyButton.css';
+
 const MyButton = ({ type = "primary", size = "sm", isDisabled = false, children, handleClick }) => {
-    const clasName = `btn btn-${type} btn-${size} ${isDisabled ? 'btn-disabled' : ''}`
+
+    const baseStyle = " flex items-center justify-center rounded-[4px]  px-4 ease-in-out transition-all duration-[300s]"
+
+    const btnTypes = {
+        primary: "bg-green-500 text-white hover:bg-green-300 border-none",
+        danger: "bg-red-500 text-white hover:bg-red-300 border-none",
+        outline: "bg-white text-black border-2 border-black border-solid hover:border-green-500 hover:text-green-500",
+        link: "bg-none text-green-500 hover:text-green-300 border-none",
+    }
+
+    const btnSizes = {
+        sm: "h-8 text-sm",
+        md: "h-9 text-base",
+        lg: "h-10 text-lg",
+    }
+
+    const disabled = isDisabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer";
+
+    const className = `${baseStyle} ${btnSizes[size]} ${btnTypes[type]} ${disabled}`;
+
     return (
         <>
-            <button onClick={handleClick} className={clasName}>
+            <button onClick={handleClick} className={className} disabled={isDisabled}>
                 {children}
             </button>
         </>
