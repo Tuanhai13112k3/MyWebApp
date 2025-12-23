@@ -1,5 +1,23 @@
 import PropTypes from 'prop-types';
 
+/**
+ * @property {string} [type] - Kiểu input (text, password...)
+ * @property {'sm' | 'md' | 'lg'} [size='md'] - Kích thước input (Gợi ý sẽ hiện ở đây)
+ * @property {boolean} [isDisabled]
+ * @property {<|>} [children]
+ * @property {function} [handleClick]
+ */
+
+/**
+ * Component Button tùy chỉnh
+ * @type {React.FunctionComponent<{
+ *  type?: string,
+ *  size?: string,
+ *  isDisabled?: boolean,
+ *  children?: React.ReactNode,
+ *  handleClick?: function
+ * }>}
+ */
 const MyButton = ({ type = "primary", size = "sm", isDisabled = false, children, handleClick }) => {
 
     const baseStyle = " flex items-center justify-center rounded-[4px]  px-4 ease-in-out transition-all duration-[300s]"

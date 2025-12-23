@@ -1,5 +1,22 @@
 import PropTypes from 'prop-types';
-const MyInput = ({ label, type = "text", size = "md", placeHolder, isDisabled = false, isReadonly = false, errorMsg, onInputChange, value }) => {
+import React from 'react';
+
+/**
+ * @typedef {Object} MyInputProps
+ * @property {string} [label] - Nhãn của input
+ * @property {string} [type] - Kiểu input (text, password...)
+ * @property {'sm' | 'md' | 'lg'} [size='md'] - Kích thước input (Gợi ý sẽ hiện ở đây)
+ * @property {string} [placeHolder]
+ * @property {boolean} [isDisabled]
+ * @property {boolean} [isReadonly]
+ * @property {string} [errorMsg]
+ */
+
+/**
+ * Component Input tùy chỉnh
+ * @type {React.ForwardRefExoticComponent<MyInputProps & React.RefAttributes<HTMLInputElement>>}
+ */
+const MyInput = React.forwardRef(({ label, type = "text", size = "md", placeHolder, isDisabled = false, isReadonly = false, errorMsg, ...props }, ref) => {
 
     const baseStyle = 'px-4 m-1 rounded-md border-2 border-gray-300 hover:border-green-300 focus:border-green-500 focus:outline-none';
 
@@ -10,30 +27,30 @@ const MyInput = ({ label, type = "text", size = "md", placeHolder, isDisabled = 
     };
 
     const disabled = isDisabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer";
+    const errorBorder = errorMsg ? "border-red-500 focus:border-red-300" : "";
     const classLabel = `${inputSize[size]} mr-2`
-    const className = `${baseStyle} ${inputSize[size]} ${disabled}`
+    const className = `${baseStyle} ${inputSize[size]} ${disabled} ${errorBorder}`
     return (
-        <>
-            <label className={classLabel}>{label}</label>
+        <div className='flex flex-col mb-2'>
+            {label && <label className={classLabel}>{label}</label>}
             <input
+                ref={ref}
                 className={className}
                 type={type}
                 readOnly={isReadonly}
                 placeholder={placeHolder}
-                value={value}
-                onChange={onInputChange}
+                {...props}
             />
-            {errorMsg && <p className="text-red-500">${errorMsg}</p>}
-        </>
+            {errorMsg && <p className="text-red-500">{errorMsg}</p>}
+        </div>
     );
-};
-
+});
 MyInput.propTypes = {
     label: PropTypes.string,
     type: PropTypes.string,
     size: PropTypes.oneOf(['sm', 'md', 'lg']),
     placeHolder: PropTypes.string,
-    isDiabled: PropTypes.bool,
+    isDisabled: PropTypes.bool,
     isReadonly: PropTypes.bool,
     errorMsg: PropTypes.string,
     onInputChange: PropTypes.func,
