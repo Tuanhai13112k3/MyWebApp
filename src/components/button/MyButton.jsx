@@ -20,7 +20,7 @@ import PropTypes from 'prop-types';
  */
 const MyButton = ({ type = "primary", size = "sm", isDisabled = false, children, handleClick }) => {
 
-    const baseStyle = " flex items-center justify-center rounded-[4px]  px-4 ease-in-out transition-all duration-[300s]"
+    const baseStyle = " flex items-center justify-center rounded-[4px]  px-4 ease-in-out transition-all duration-300"
 
     const btnTypes = {
         primary: "bg-green-500 text-white hover:bg-green-300 border-none",

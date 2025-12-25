@@ -28,8 +28,8 @@ const MyInput = React.forwardRef(({ label, type = "text", size = "md", placeHold
 
     const disabled = isDisabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer";
     const errorBorder = errorMsg ? "border-red-500 focus:border-red-300" : "";
-    const classLabel = `${inputSize[size]} mr-2`
-    const className = `${baseStyle} ${inputSize[size]} ${disabled} ${errorBorder}`
+    const classLabel = `h-fit ${inputSize[size]} font-bold`
+    const className = `${baseStyle} ${inputSize[size]} ${disabled} ${errorBorder} cursor-text`
     return (
         <div className='flex flex-col mb-2'>
             {label && <label className={classLabel}>{label}</label>}
@@ -41,7 +41,7 @@ const MyInput = React.forwardRef(({ label, type = "text", size = "md", placeHold
                 placeholder={placeHolder}
                 {...props}
             />
-            {errorMsg && <p className="text-red-500">{errorMsg}</p>}
+            {errorMsg && <p className="text-red-500 text-xs mt-1 italic">{errorMsg}</p>}
         </div>
     );
 });
