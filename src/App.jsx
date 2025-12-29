@@ -26,6 +26,8 @@ import MyTodoList from "./pages/listTodo/MyTodoList";
 function App() {
   const [isFormVisible, setVisible] = useState(false);
   const [editTask, setEditTask] = useState(null);
+  const [searchText, setSearchText] = useState('');
+  const [filterDate, setFilterDate] = useState('');
   const [tasks, setTasks] = useState([
     { id: 1, title: 'Task 1', description: 'Do something', priority: 'high', date: '2025-12-24T20:20', status: 'todo' },
     { id: 11, title: 'Task 11', description: 'Do something', priority: 'high', date: '2025-12-24T20:20', status: 'todo' },
@@ -79,6 +81,17 @@ function App() {
     setVisible(true);
   }
 
+  const filteredTasks = tasks.filter(task => {
+    const matchSearch = searchText === '' ||
+      task.title.toLowerCase().includes(searchText.toLowerCase()) ||
+      task.description.toLowerCase().includes(searchText.toLowerCase());
+
+    const matchDate = filterDate === '' ||
+      task.date.startsWith(filterDate);
+
+    return matchSearch && matchDate;
+  });
+
   const fields = [
     { key: 'todo', label: 'Todo' },
     { key: 'inProgres', label: 'In Progress' },
@@ -120,10 +133,17 @@ function App() {
         </div>
         {/*Content_Button */}
         <div className="flex justify-between mt-2 mb-4">
-          <MyInput type="text" placeHolder="Search" />
-          <MyInput type="datetime-local" placeHolder="Search" />
+          <MyInput
+            type="text"
+            placeHolder="Search"
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+          <MyInput
+            type="date"
+            onChange={(e) => setFilterDate(e.target.value)}
+          />
         </div>
-        <MyTodoList fields={fields} data={tasks} handleDoubleClick={handleCardDoubleClick}></MyTodoList>
+        <MyTodoList fields={fields} data={filteredTasks} handleDoubleClick={handleCardDoubleClick}></MyTodoList>
         {isFormVisible && <FormAdd handleFormSubmit={handleFormSubmit} task={editTask} handleFormClose={handleFormClose} />}
       </div>
     </div>
