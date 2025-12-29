@@ -1,0 +1,6 @@
+export const ACTION_TYPES = {
+  ADD: "ADD_TASK",
+  DELETE: "DELETE_TASK",
+  TOGGLE: "TOGGLE_TASK",
+  EDIT: "EDIT_TASK",
+};

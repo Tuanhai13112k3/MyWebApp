@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTaskDispatch } from "../hooks/useTaskContext.jsx";
+import { ACTION_TYPES } from "../store/constants.js";
 
 const AddTask = () => {
   const [text, setText] = useState("");
@@ -8,7 +9,7 @@ const AddTask = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!text.trim()) return;
-    dispatch({ type: "ADD_TASK", payload: text });
+    dispatch({ type: ACTION_TYPES.ADD, payload: text });
     setText("");
   };
   console.log("AddTask render");
