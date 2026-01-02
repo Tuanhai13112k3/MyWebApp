@@ -8,6 +8,7 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
 import TodoList from "../pages/TodoList";
+import UserManager from "../pages/UserManager";
 
 export default function AppRoutes() {
     return useRoutes([
@@ -22,7 +23,10 @@ export default function AppRoutes() {
 
                 {
                     element: <RequireRole roles={["admin"]} />,
-                    children: [{ path: "/admin", element: <Admin /> }],
+                    children: [
+                        { path: "/admin", element: <Admin /> },
+                        { path: "/usermanager", element: <UserManager /> },
+                    ],
                 },
             ],
         },

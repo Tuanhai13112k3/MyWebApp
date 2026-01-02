@@ -33,6 +33,16 @@ const Home = () => {
                                 >
                                     Admin Dashboard
                                 </Link>
+
+                            )}
+                            {user.role === "admin" && (
+                                <Link
+                                    to="/usermanager"
+                                    className="block text-center px-6 py-3 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition"
+                                >
+                                    Manage User
+                                </Link>
+
                             )}
                             <button
                                 onClick={logout}
